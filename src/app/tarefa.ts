@@ -1,9 +1,10 @@
 export class Tarefa {
-    _id : string | undefined ;
+    _id?: string;
     descricao: string;
     statusRealizada: boolean;
-    constructor(_descricao: string, _statusRealizada: boolean) {
-        this.descricao = _descricao;
-        this.statusRealizada = _statusRealizada;
+    constructor(descricao: string, statusRealizada: boolean, id?: string) {
+        this.descricao = descricao;
+    this.statusRealizada = completo;
+    this._id = id;
     }
 }
