@@ -1,15 +1,22 @@
 {
-  "buildCommand": "npm run build",
-  "installCommand": "npm install",
-  "functions": {
-    "dist/TODOapp/server/server.mjs": {
-      "runtime": "nodejs20.x"
-    }
-  },
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist/TODOapp/browser"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "https://seu-backend.railway.app/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
     }
   ]
 }
