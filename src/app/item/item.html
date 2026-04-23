@@ -4,16 +4,14 @@
     <label [for]="tarefa.descricao">{{tarefa.descricao}}</label>
     <div *ngIf="!emEdicao" class="btn-wrapper">
         <button class="btn" (click)="emEdicao = true ">Editar</button>
-        <button class="btn btn-warn" (click)="onRemover()">Remover</button>
+        <button (click)="abrirModalExclusao()">Excluir</button>
     </div>
-        <div *ngIf="mostrarmodal" class="modal-confirmacao">
-        <div class="modal-content">
-            <p>Tem certeza que deseja excluir a tarefa "{{tarefa.descricao}}"?</p>
-            <div class="btn-wrapper">
-                <button class="btn" (click)="cancelarExclusao()">Cancelar</button>
-                <button class="btn btn-danger" (click)="confirmarExclusao()">Excluir</button>
-            </div>
-        </div>
+        <div class="modal" *ngIf="mostrarmodal">
+  <div class="modal-content">
+    <p>Tem certeza que deseja excluir "{{tarefa.descricao}}"?</p>
+    <button (click)="cancelarExclusao()">Cancelar</button>
+    <button (click)="confirmarExclusao()">Confirmar</button>
+  </div>
 </div>
     <div *ngIf="emEdicao">
         <input class="sm-text-input" #editedItem placeholder="escreva o novo nome da tarefa aqui"
