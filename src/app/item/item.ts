@@ -10,7 +10,7 @@ import { Tarefa } from "../tarefa";
 export class Item {
   emEdicao = false;
   mostrarmodal = false;
-  @Input() tarefa: Tarefa = new Tarefa ("", false);
+  @Input() tarefa: Tarefa = new Tarefa("", false);
   @Output() remover = new EventEmitter<Tarefa>();
   @Output() modificaTarefa = new EventEmitter();
 
@@ -28,6 +28,11 @@ export class Item {
   }
 
   onRemover() {
-    this.remover.emit(this.tarefa);
+    this.abrirModalExclusao(); // Abre o modal em vez de emitir direto
+  }
+
+  toggleComplete() {
+    this.tarefa.completed = !this.tarefa.completed;
+    this.modificaTarefa.emit(this.tarefa);
   }
 }

@@ -27,3 +27,44 @@ body {
         width: 100%;
     }
 }
+
+/* src/app/app.component.css */
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.todo-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.todo-item .task-text {
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.todo-item.completed .task-text {
+  text-decoration: line-through;
+  opacity: 0.6;
+  transform: scale(0.98);
+}
+
+.todo-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.todo-checkbox:hover {
+  transform: scale(1.1);
+}

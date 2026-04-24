@@ -199,3 +199,17 @@
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
 }
+
+/* ============================================ */
+ /* EFEITO DE RISCAR AO COMPLETAR TAREFA */
+ /* ============================================ */
+ .item.completed label {
+     text-decoration: line-through;
+     opacity: 0.6;
+     transition: all 0.3s ease-in-out;
+ }
+ 
+ .item.completed {
+     background: linear-gradient(135deg, #f8f9fa, #f1f3f5);
+     transition: all 0.3s ease;
+ }
