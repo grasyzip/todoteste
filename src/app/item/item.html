@@ -1,8 +1,11 @@
-<div class="item" [class.completed]="tarefa.statusRealizada">
-    <input [id]="tarefa.descricao" 
-        type="checkbox" 
-        [checked]="tarefa.statusRealizada"
-        (change)="onToggleComplete($event)" />
+<div class="item" [class.completed]="tarefa.statusRealizada" [class.importante]="tarefa.importante">
+    <!-- Botão de Estrela para marcar como importante -->
+    <button class="btn-star" (click)="toggleImportante()" [class.active]="tarefa.importante">
+        ⭐
+    </button>
+    
+    <input [id]="tarefa.descricao" type="checkbox" [checked]="tarefa.statusRealizada"
+        (change)="tarefa.statusRealizada = !tarefa.statusRealizada; modificaTarefa.emit()" />
     <label [for]="tarefa.descricao">{{tarefa.descricao}}</label>
     
     <div *ngIf="!emEdicao" class="btn-wrapper">
