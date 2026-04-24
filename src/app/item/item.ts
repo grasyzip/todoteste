@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { Tarefa } from "../tarefa";
-import * as confetti from 'canvas-confetti';
+import confetti from 'canvas-confetti';
 
 @Component({
   selector: 'app-item',
