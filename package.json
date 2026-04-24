@@ -23,13 +23,15 @@
     "angular-cli": "^0.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.0"
+    "zone.js": "~0.14.0",
+    "canvas-confetti": "^1.9.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.0",
     "@angular/cli": "^18.2.0",
     "@angular/compiler-cli": "^18.2.0",
     "@types/node": "^18.19.0",
+    "@types/canvas-confetti": "^1.6.4",
     "typescript": "~5.5.0"
   }
 }
