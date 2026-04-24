@@ -1,7 +1,7 @@
 <div class="item" [class.completed]="tarefa.statusRealizada" [class.importante]="tarefa.importante">
-    <!-- Botão de Estrela para marcar como importante -->
-    <button class="btn-star" (click)="toggleImportante()" [class.active]="tarefa.importante">
-        ⭐
+    <!-- Botão de Bandeira para marcar como importante -->
+    <button class="btn-flag" (click)="toggleImportante()" [class.active]="tarefa.importante" title="Marcar como importante">
+        🚩
     </button>
     
     <input [id]="tarefa.descricao" type="checkbox" [checked]="tarefa.statusRealizada"
@@ -28,7 +28,7 @@
             [value]="tarefa.descricao">
         <div class="btn-wrapper">
             <button class="btn" (click)="emEdicao = false">Cancelar</button>
-            <button class="btn btn-save" (click)="tarefa.descricao=editedItem.value; emEdicao = false; modificaTarefa.emit()">Salvar</button>
+            <button class="btn btn-save" (click)="tarefa.descricao=editedItem.value; emEdicao = false; modificaTarefa.emit()">💾 Salvar</button>
         </div>
     </div>
 </div>
