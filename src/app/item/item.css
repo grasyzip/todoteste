@@ -208,8 +208,8 @@
 /* ESTILOS PARA TAREFAS IMPORTANTES */
 /* ============================================ */
 
-/* Botão de estrela */
-.btn-star {
+/* Botão de bandeira */
+.btn-flag {
     background: none;
     border: none;
     font-size: 1.5rem;
@@ -220,18 +220,18 @@
     min-width: 40px;
 }
 
-.btn-star:hover {
+.btn-flag:hover {
     transform: scale(1.2);
-    color: #ffd700;
+    color: #ff6b6b;
 }
 
-.btn-star.active {
-    color: #ffd700;
-    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
-    animation: starPop 0.3s ease;
+.btn-flag.active {
+    color: #ff4444;
+    text-shadow: 0 0 5px rgba(255, 68, 68, 0.5);
+    animation: flagPop 0.3s ease;
 }
 
-@keyframes starPop {
+@keyframes flagPop {
     0% {
         transform: scale(1);
     }
@@ -243,21 +243,27 @@
     }
 }
 
-/* Estilo para tarefas importantes */
+/* Estilo para tarefas importantes - FUNDO AMARELO PASTEL */
 .item.importante {
-    border-left: 4px solid #ffd700;
-    background: linear-gradient(135deg, #fffef5, #fff9e6);
+    background: #FFF9C4 !important;  /* Amarelo pastel */
+    border-left: 4px solid #FBC02D;
+    box-shadow: 0 2px 8px rgba(251, 192, 45, 0.3);
 }
 
 .item.importante:hover {
-    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+    background: #FFF59D !important;  /* Amarelo mais escuro no hover */
+    box-shadow: 0 5px 15px rgba(251, 192, 45, 0.4);
 }
 
 .item.importante label {
     font-weight: 600;
+    color: #5D4037;
 }
 
+/* ============================================ */
 /* EFEITO DE RISCAR AO COMPLETAR TAREFA */
+/* ============================================ */
+
 .item.completed label {
     text-decoration: line-through;
     opacity: 0.6;
@@ -271,8 +277,8 @@
 
 /* Ajuste para item completo e importante ao mesmo tempo */
 .item.completed.importante {
-    background: linear-gradient(135deg, #f8f9fa, #f1f3f5);
-    border-left: 4px solid #ffd700;
+    background: #FFF9C4 !important;
+    border-left: 4px solid #FBC02D;
 }
 
 .item.completed.importante label {
