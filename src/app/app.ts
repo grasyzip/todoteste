@@ -15,7 +15,7 @@ export class App {
 
   arrayDeTarefas = signal<Tarefa[]>([]);
   apiURL: string;
-  filtroAtual: string = 'todas';  // para filtros
+  filtroAtual: string = 'todas';
 
   constructor(private http: HttpClient) {
     this.apiURL = 'https://passionate-simplicity-production-0313.up.railway.app';
@@ -24,17 +24,17 @@ export class App {
 
   // Ordenar tarefas (importantes no topo)
   ordenarTarefas(tarefas: Tarefa[]): Tarefa[] {
-    return tarefas.sort((a, b) => {
-      // Primeiro critério: tarefas importantes vêm primeiro
+    return [...tarefas].sort((a, b) => {
+      // Importantes primeiro
       if (a.importante && !b.importante) return -1;
       if (!a.importante && b.importante) return 1;
       
-      // Segundo critério: tarefas não realizadas vêm antes
+      // Depois não realizadas
       if (a.statusRealizada !== b.statusRealizada) {
         return a.statusRealizada ? 1 : -1;
       }
       
-      // Terceiro critério: por data de criação (mais antigo primeiro)
+      // Por fim, por ID (ordem de criação)
       return (a._id || '').localeCompare(b._id || '');
     });
   }
@@ -45,9 +45,9 @@ export class App {
     
     switch(this.filtroAtual) {
       case 'importantes':
-        return tarefas.filter(t => t.importante);
+        return tarefas.filter(t => t.importante === true);
       case 'normais':
-        return tarefas.filter(t => !t.importante);
+        return tarefas.filter(t => t.importante !== true);
       default:
         return tarefas;
     }
@@ -56,6 +56,7 @@ export class App {
   // Mudar filtro
   mudarFiltro(filtro: string) {
     this.filtroAtual = filtro;
+    console.log('Filtro alterado para:', filtro);
   }
 
   READ_tarefas() {
@@ -117,7 +118,7 @@ export class App {
 
   UPDATE_tarefa(tarefaAserModificada: Tarefa) {
     const id = tarefaAserModificada._id;
-    console.log('Atualizando tarefa com ID:', id);
+    console.log('Atualizando tarefa com ID:', id, 'Importante:', tarefaAserModificada.importante);
     
     this.http.patch(`${this.apiURL}/api/update/${id}`, tarefaAserModificada).subscribe({
       next: (resultado) => {
