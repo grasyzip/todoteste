@@ -1,9 +1,8 @@
 <div class="item" [class.completed]="tarefa.statusRealizada">
-    <input #checkboxElement
-        [id]="tarefa.descricao" 
+    <input [id]="tarefa.descricao" 
         type="checkbox" 
         [checked]="tarefa.statusRealizada"
-        (change)="onToggleComplete()" />
+        (change)="onToggleComplete($event)" />
     <label [for]="tarefa.descricao">{{tarefa.descricao}}</label>
     
     <div *ngIf="!emEdicao" class="btn-wrapper">
