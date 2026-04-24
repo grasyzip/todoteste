@@ -31,11 +31,8 @@ export class Item {
     this.abrirModalExclusao();
   }
 
-  // MÉTODO PARA ALTERNAR IMPORTÂNCIA
-  toggleImportante() {
-    console.log('Alternando importância da tarefa:', this.tarefa.descricao, 'Antes:', this.tarefa.importante);
-    this.tarefa.importante = !this.tarefa.importante;
-    console.log('Depois:', this.tarefa.importante);
+  toggleComplete() {
+    this.tarefa.completed = !this.tarefa.completed;
     this.modificaTarefa.emit(this.tarefa);
   }
 }
