@@ -15,17 +15,62 @@ export class App {
 
   arrayDeTarefas = signal<Tarefa[]>([]);
   apiURL: string;
+  filtroAtual: string = 'todas';  // para filtros
 
   constructor(private http: HttpClient) {
     this.apiURL = 'https://passionate-simplicity-production-0313.up.railway.app';
     this.READ_tarefas();
   }
 
+  // Ordenar tarefas (importantes no topo)
+  ordenarTarefas(tarefas: Tarefa[]): Tarefa[] {
+    return tarefas.sort((a, b) => {
+      // Primeiro critério: tarefas importantes vêm primeiro
+      if (a.importante && !b.importante) return -1;
+      if (!a.importante && b.importante) return 1;
+      
+      // Segundo critério: tarefas não realizadas vêm antes
+      if (a.statusRealizada !== b.statusRealizada) {
+        return a.statusRealizada ? 1 : -1;
+      }
+      
+      // Terceiro critério: por data de criação (mais antigo primeiro)
+      return (a._id || '').localeCompare(b._id || '');
+    });
+  }
+
+  // Filtrar tarefas
+  tarefasFiltradas(): Tarefa[] {
+    let tarefas = this.arrayDeTarefas();
+    
+    switch(this.filtroAtual) {
+      case 'importantes':
+        return tarefas.filter(t => t.importante);
+      case 'normais':
+        return tarefas.filter(t => !t.importante);
+      default:
+        return tarefas;
+    }
+  }
+
+  // Mudar filtro
+  mudarFiltro(filtro: string) {
+    this.filtroAtual = filtro;
+  }
+
   READ_tarefas() {
     this.http.get<Tarefa[]>(`${this.apiURL}/api/getAll`).subscribe({
       next: (resultado) => {
         console.log('Tarefas carregadas:', resultado);
-        this.arrayDeTarefas.set(resultado);
+        // Garantir que todas as tarefas tenham a propriedade 'importante'
+        const tarefasComImportante = resultado.map(t => {
+          if (t.importante === undefined) {
+            t.importante = false;
+          }
+          return t;
+        });
+        const tarefasOrdenadas = this.ordenarTarefas(tarefasComImportante);
+        this.arrayDeTarefas.set(tarefasOrdenadas);
       },
       error: (erro) => {
         console.error('Erro ao carregar tarefas:', erro);
@@ -33,19 +78,18 @@ export class App {
     });
   }
 
-  // MÉTODO ADICIONADO - estava faltando!
   CREATE_tarefa(descricao: string) {
     if (!descricao || descricao.trim() === '') {
       console.warn('Descrição vazia');
       return;
     }
 
-    const novaTarefa = new Tarefa(descricao, false);
+    const novaTarefa = new Tarefa(descricao, false, undefined, false, false);
     
     this.http.post<Tarefa>(`${this.apiURL}/api/post`, novaTarefa).subscribe({
       next: (resultado) => {
         console.log('Tarefa criada:', resultado);
-        this.READ_tarefas(); // Recarrega a lista
+        this.READ_tarefas();
         if (this.campoNovoItem) {
           this.campoNovoItem.nativeElement.value = '';
         }
