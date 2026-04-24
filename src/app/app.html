@@ -1,13 +1,30 @@
 <div class="main">
   <h3>Grasielly (255041) & Daniela (253019)</h3>
   <h1>TODO List App</h1>
-  <input class="lg-text-input" #campoNovoItem (keyup.enter)="CREATE_tarefa(campoNovoItem.value)" />
+  
+  <!-- Botões de filtro -->
+  <div class="filter-buttons">
+    <button class="btn-filter" (click)="mudarFiltro('todas')" [class.active]="filtroAtual === 'todas'">
+      Todas
+    </button>
+    <button class="btn-filter" (click)="mudarFiltro('importantes')" [class.active]="filtroAtual === 'importantes'">
+      Importantes
+    </button>
+    <button class="btn-filter" (click)="mudarFiltro('normais')" [class.active]="filtroAtual === 'normais'">
+      Normais
+    </button>
+  </div>
+  
+  <input class="lg-text-input" #campoNovoItem (keyup.enter)="CREATE_tarefa(campoNovoItem.value)" 
+         placeholder="Digite uma nova tarefa..." />
   <button class="btn-primary" (click)="CREATE_tarefa(campoNovoItem.value)">
     Adicionar Tarefa
   </button>
+  
   <ul>
-    <li *ngFor="let tarefaDoLoop of arrayDeTarefas()">
-      <app-item [tarefa]="tarefaDoLoop" (remover)="DELETE_tarefa(tarefaDoLoop)" (modificaTarefa)="UPDATE_tarefa(tarefaDoLoop)"></app-item>
+    <li *ngFor="let tarefaDoLoop of tarefasFiltradas()">
+      <app-item [tarefa]="tarefaDoLoop" (remover)="DELETE_tarefa(tarefaDoLoop)" 
+                (modificaTarefa)="UPDATE_tarefa(tarefaDoLoop)"></app-item>
     </li>
   </ul>
 </div>
