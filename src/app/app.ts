@@ -17,7 +17,7 @@ export class App {
   apiURL: string;
 
   constructor(private http: HttpClient) {
-    this.apiURL = 'https://passionate-simplicity-production-0313.up.railway.app';
+    this.apiURL = 'https://apitarefasgrasielly255041.up.railway.app';
     this.READ_tarefas();
   }
 
